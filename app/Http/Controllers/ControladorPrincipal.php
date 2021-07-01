@@ -11,7 +11,7 @@ class ControladorPrincipal extends Controller
 
         $teste = DB::table('teste')->get();
 
-        return view('principal')->with('teste', $teste);
+        return response()->json($teste);
 
     }
 }

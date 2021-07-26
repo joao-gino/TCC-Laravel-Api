@@ -9,9 +9,9 @@ class ControladorPrincipal extends Controller
 {
     public function index() {
 
-        $teste = DB::table('teste')->get();
+        $teste = DB::table('app_users')->get();
 
-        return response()->json($teste);
+        return response()->json($teste, 200);
 
     }
 }

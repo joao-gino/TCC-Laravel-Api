@@ -11,7 +11,12 @@ class ControladorPrincipal extends Controller
 
         $teste = DB::table('app_users')->get();
 
-        return response()->json($teste, 200);
+        //$teste = json_encode($teste);
 
+        //$teste = trim($teste, '[]');
+
+        //var_dump($teste);
+
+        return response()->json(['data' => $teste], 200);
     }
 }

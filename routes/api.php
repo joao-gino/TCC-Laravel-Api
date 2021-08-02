@@ -23,3 +23,5 @@ Route::get('/', 'App\Http\Controllers\ControladorPrincipal@index')->name('index'
 Route::post('/register', 'App\Http\Controllers\ControladorCadastro@cadastro')->name('register');
 
 Route::post('/login', 'App\Http\Controllers\ControladorLogin@login')->name('login');
+
+Route::get('/email', 'App\Http\Controllers\MailController@sendEmail')->name('email');

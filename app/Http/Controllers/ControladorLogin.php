@@ -24,6 +24,5 @@ class ControladorLogin extends Controller
         } else {
             return response()->json(['data' => 'OK'], 200);
         }
-
     }
 }

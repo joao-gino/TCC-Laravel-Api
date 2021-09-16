@@ -45,7 +45,7 @@ class ControladorCadastro extends Controller
 
             \DB::commit();
 
-            return response()->json(200);
+            return response()->json(201);
         } catch (\Exception $e) {
             \DB::rollback();
             return 'Obtivemos um erro.';

@@ -6,11 +6,6 @@ use Illuminate\Http\Request;
 
 class ControladorLogin extends Controller
 {
-    public function __construct()
-    {
-
-    }
-
     public function login(Request $req)
     {
         $username = $req->username;

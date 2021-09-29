@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', 'App\Http\Controllers\ControladorCadastro@cadastro')->name('register');
 Route::post('/login', 'App\Http\Controllers\ControladorLogin@login')->name('login');
 Route::get('/email', 'App\Http\Controllers\MailController@sendEmail')->name('email');
+Route::post('/recovery-password', 'App\Http\Controllers\ControladorCadastro@recoveryPassword')->name('recoveryPassword');
 
 // TCC's
 Route::get('/tcc', 'App\Http\Controllers\ControladorTCC@listarTcc')->name('listarTcc');

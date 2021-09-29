@@ -86,3 +86,34 @@ CREATE TABLE app_categories (
 );
 END
 
+BEGIN
+CREATE TABLE app_etapas (
+	id int auto_increment primary key,
+    nome varchar(50) not null,
+    id_tcc int  not null,
+    FOREIGN KEY FK_App_etapas_tcc (id_tcc) REFERENCES app_tcc (id) ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+END
+
+BEGIN
+CREATE TABLE app_status_tasks (
+		id int auto_increment primary key,
+        nome varchar(20) not null
+);
+END
+
+BEGIN
+INSERT INTO app_status_tasks (id, nome) VALUES (1, 'Pendentes'), (2, 'Em Progresso'), (3, 'Finalizados');
+END
+
+BEGIN
+CREATE TABLE app_tasks (
+	id int auto_increment primary key,
+    id_etapa int not null,
+    id_status int default 1 not null,
+    nome varchar(50) not null,
+    descricao text,
+    FOREIGN KEY FK_App_tasks_etapas (id_etapa) REFERENCES app_etapas (id) ON UPDATE NO ACTION ON DELETE NO ACTION,
+    FOREIGN KEY FK_App_tasks_status (id_status) REFERENCES app_status_tasks (id) ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+END

@@ -45,22 +45,31 @@ VALUES
 END
 
 BEGIN
+CREATE TABLE app_advisors (
+	id int auto_increment primary key,
+    id_user int not null,
+    FOREIGN KEY FK_App_advisors_users (id_user) REFERENCES app_users(id) ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+END
+
+BEGIN
 CREATE TABLE app_tcc (
 		id int auto_increment primary key,
-        id_user1 int not null,
-        id_user2 int,
-        id_user3 int,
+        id_user int not null,
+        id_advisor int not null,
         id_category int not null,
         name varchar(100) not null,
+        area varchar(100) not null,
+        description text not null,
+        logo text not null,
         ended bool,
 		status char(1) default 'A',
 		user_add varchar(50) not null,
 		date_add datetime default current_timestamp,
 		user_update varchar(50),
 		date_update datetime,
-        FOREIGN KEY FK_App_tcc_users1 (id_user1) REFERENCES app_users(id) ON UPDATE NO ACTION ON DELETE NO ACTION,
-        FOREIGN KEY FK_App_tcc_users2 (id_user2) REFERENCES app_users(id) ON UPDATE NO ACTION ON DELETE NO ACTION,
-        FOREIGN KEY FK_App_tcc_users3 (id_user3) REFERENCES app_users(id) ON UPDATE NO ACTION ON DELETE NO ACTION,
+        FOREIGN KEY FK_App_tcc_users (id_user) REFERENCES app_users(id) ON UPDATE NO ACTION ON DELETE NO ACTION,
+        FOREIGN KEY FK_App_tcc_advisors (id_advisor) REFERENCES app_advisors (id) ON UPDATE NO ACTION ON DELETE NO ACTION,
         FOREIGN KEY FK_App_tcc_category (id_category) REFERENCES app_categories(id) ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 END

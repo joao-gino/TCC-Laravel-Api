@@ -17,8 +17,8 @@ class AuthBasic
      */
     public function handle(Request $request, Closure $next)
     {
-        $AUTH_USER = 'ApiTCC';
-        $AUTH_PASS = 'admin';
+        $AUTH_USER = env('API_USER');
+        $AUTH_PASS = env('API_PASS');
         header('Cache-Control: no-cache, must-revalidate, max-age=0');
         $has_supplied_credentials = !(empty($_SERVER['PHP_AUTH_USER']) && empty($_SERVER['PHP_AUTH_PW']));
         $is_not_authenticated = (

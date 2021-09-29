@@ -34,21 +34,31 @@ class ControladorCadastro extends Controller
             $password = sha1($req->password);
             $token = rand(1111111, 9999999);
 
-            \DB::table('app_users')->insert([
-                'username' => $username,
-                'access_key' => $password,
-                'first_name' => $firstname,
-                'last_name' => $lastname,
-                'email' => $req->email,
-                'token' => $token,
-            ]);
+            $user = \DB::table('app_users')->where('email', $req->email)->get();
 
-            \DB::commit();
+            if (!empty($user[0])) { // Se a variável $user não estiver vazia...
 
-            return response()->json(201);
+                return response()->json(['message' => 'Usuário já existe.'], 400);
+
+            } else {
+
+                \DB::table('app_users')->insert([
+                    'username' => $username,
+                    'access_key' => $password,
+                    'first_name' => $firstname,
+                    'last_name' => $lastname,
+                    'email' => $req->email,
+                    'token' => $token,
+                ]);
+    
+                \DB::commit();
+    
+                return response()->json(201);
+
+            }
         } catch (\Exception $e) {
             \DB::rollback();
-            return 'Obtivemos um erro.';
+            return $e;
         }
     }
 }

@@ -48,7 +48,7 @@ class ControladorCadastro extends Controller
     
                 \DB::commit();
     
-                return response()->json(201);
+                return response()->json(["message" => "Usuário cadastrado com sucesso"],201);
 
             }
         } catch (\Exception $e) {

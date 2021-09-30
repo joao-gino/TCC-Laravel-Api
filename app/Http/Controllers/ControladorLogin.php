@@ -17,7 +17,7 @@ class ControladorLogin extends Controller
         {
             return response()->json(['data' => 'Credenciais incorretas'], 200);
         } else {
-            return response()->json(['data' => 'OK'], 200);
+            return response()->json(['data' => 'Autenticado com sucesso!'], 200);
         }
     }
 }

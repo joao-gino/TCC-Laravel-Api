@@ -40,6 +40,6 @@ Route::post('/etapas/tasks/new', 'App\Http\Controllers\ControladorTasks@novaTask
 Route::put('/etapas/tasks/att', 'App\Http\Controllers\ControladorTasks@updateTask')->name('updateTask'); // * OK
 Route::delete('/etapas/tasks/delete', 'App\Http\Controllers\ControladorTasks@deleteTask')->name('deleteTask'); // * OK
 
-// TODO Status
+// * Status
 Route::get('/status', 'App\Http\Controllers\ControladorStatus@listarStatus')->name('listarStatus'); // * OK
 

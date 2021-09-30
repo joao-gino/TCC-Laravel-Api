@@ -34,7 +34,7 @@ class ControladorCadastro extends Controller
     
                 $email->sendEmail($username, $password, $req->email, $firstname);
     
-                $password = sha1($req->password);
+                $password = sha1($password);
                 $token = rand(1111111, 9999999);
 
                 \DB::table('app_users')->insert([

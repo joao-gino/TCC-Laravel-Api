@@ -30,10 +30,6 @@ class ControladorCadastro extends Controller
                 $firstname = ucwords($name[0]);
                 $lastname = ucwords($name[1]);
     
-                $email = new MailController();
-    
-                $email->sendEmail($username, $password, $req->email, $firstname);
-    
                 $password = sha1($password);
                 $token = rand(1111111, 9999999);
 
@@ -47,8 +43,12 @@ class ControladorCadastro extends Controller
                 ]);
     
                 \DB::commit();
+
+                $email = new MailController();
     
-                return response()->json(["message" => "Usuário cadastrado com sucesso"],201);
+                $email->sendEmail($username, $password, $req->email, $firstname);
+    
+                return response()->json(["message" => "Usuário cadastrado com sucesso"], 201);
 
             }
         } catch (\Exception $e) {

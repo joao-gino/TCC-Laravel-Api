@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 // * Rotas Principais
-Route::post('/register', 'App\Http\Controllers\ControladorCadastro@cadastro')->name('register');
-Route::post('/login', 'App\Http\Controllers\ControladorLogin@login')->name('login');
-Route::get('/email', 'App\Http\Controllers\MailController@sendEmail')->name('email');
-Route::post('/recovery-password', 'App\Http\Controllers\ControladorCadastro@recoveryPassword')->name('recoveryPassword');
+Route::post('/register', 'App\Http\Controllers\ControladorCadastro@cadastro')->name('register'); // Cadastro de Usuários
+Route::post('/login', 'App\Http\Controllers\ControladorLogin@login')->name('login'); // Login de Usuário
+Route::get('/email', 'App\Http\Controllers\MailController@sendEmail')->name('email'); // Envio de e-mail pós-cadastro
+Route::post('/recovery-password', 'App\Http\Controllers\ControladorCadastro@recoveryPassword')->name('recoveryPassword'); // Recuperação de Senha do usuário
 
 // * TCC's
 Route::get('/tcc', 'App\Http\Controllers\ControladorTCC@listarTcc')->name('listarTcc');
@@ -43,3 +43,11 @@ Route::delete('/etapas/tasks/delete', 'App\Http\Controllers\ControladorTasks@del
 // * Status
 Route::get('/status', 'App\Http\Controllers\ControladorStatus@listarStatus')->name('listarStatus'); // * OK
 
+// * Usuários
+Route::get('/users', 'App\Http\Controllers\ControladorUsuarios@listarUsers')->name('listarUsers'); // * OK
+
+// * Categorias
+Route::get('/categories', 'App\Http\Controllers\ControladorCategorias@listarCategories')->name('listarCategories'); // * OK
+
+// * Orientadores
+Route::get('/advisors', 'App\Http\Controllers\ControladorOrientadores@listarAdvisors')->name('listarAdvisors'); // * OK

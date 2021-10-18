@@ -15,9 +15,9 @@ class ControladorLogin extends Controller
 
         if (empty($user[0]))
         {
-            return response()->json(['mensagem' => 'Credenciais incorretas'], 400);
+            return response()->json(['message' => 'Credenciais incorretas'], 400);
         } else {
-            return response()->json(['mensagem' => 'Autenticado com sucesso!'], 200);
+            return response()->json(['message' => 'Autenticado com sucesso!'], 200);
         }
     }
 }

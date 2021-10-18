@@ -11,14 +11,14 @@ class ControladorTasks extends Controller
 
         $tasks = DB::table('app_tasks')->where('id_etapa', $req->id_etapa)->get();
 
-        return response()->json(['data' => $tasks], 200);
+        return response()->json($tasks, 200);
     }
 
     public function getTask(Request $req) {
 
         $task = DB::table('app_tasks')->where('id_etapa', $req->id_etapa)->where('id', $req->id_task)->get();
 
-        return response()->json(['data' => $task], 200);
+        return response()->json($task, 200);
     }
 
     public function novaTask(Request $req) {

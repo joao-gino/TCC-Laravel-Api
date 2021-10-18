@@ -11,7 +11,7 @@ class ControladorTCC extends Controller
 
         $tccs = DB::table('app_tcc')->get();
 
-        return response()->json(['data' => $tccs], 200);
+        return response()->json($tccs, 200);
     }
 
     public function getTccByUser(Request $req) {
@@ -24,7 +24,7 @@ class ControladorTCC extends Controller
 
         } else {
 
-            return response()->json(['data' => $tcc], 200);
+            return response()->json($tcc, 200);
 
         }
     }

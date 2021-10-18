@@ -11,6 +11,6 @@ class ControladorStatus extends Controller
 
         $status = DB::table('app_status_tasks')->get();
 
-        return response()->json(['data' => $status], 200);
+        return response()->json($status, 200);
     }
 }

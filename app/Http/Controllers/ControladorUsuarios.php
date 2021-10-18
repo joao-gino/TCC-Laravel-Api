@@ -11,6 +11,6 @@ class ControladorUsuarios extends Controller
 
         $users = DB::table('app_users')->get();
 
-        return response()->json(['data' => $users], 200);
+        return response()->json($users, 200);
     }
 }

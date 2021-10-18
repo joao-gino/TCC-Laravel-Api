@@ -14,6 +14,6 @@ class ControladorOrientadores extends Controller
                     ->leftjoin('app_users as au', 'au.id', 'ad.id_user')
                     ->get();
 
-        return response()->json(['advisors' => $advisors], 200);
+        return response()->json($advisors, 200);
     }
 }

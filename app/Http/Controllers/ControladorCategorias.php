@@ -11,6 +11,6 @@ class ControladorCategorias extends Controller
 
         $categories = DB::table('app_categories')->get();
 
-        return response()->json(['data' => $categories], 200);
+        return response()->json($categories, 200);
     }
 }

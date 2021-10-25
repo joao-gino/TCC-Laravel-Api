@@ -51,3 +51,6 @@ Route::get('/categories', 'App\Http\Controllers\ControladorCategorias@listarCate
 
 // * Orientadores
 Route::get('/advisors', 'App\Http\Controllers\ControladorOrientadores@listarAdvisors')->name('listarAdvisors'); // * OK
+
+// * Chat
+Route::post('/messages', 'App\Http\Controllers\ChatController@message'); // * OK

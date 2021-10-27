@@ -9,7 +9,7 @@ class ChatController extends Controller
 {
     public function message(Request $req) {
 
-        event(new Message($req->input('username'), $req->input('message')));
+        event(new Message($req->input('message'), $req->input('username')));
 
         return [];
 

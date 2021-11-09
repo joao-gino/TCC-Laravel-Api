@@ -9,6 +9,13 @@ class ControladorEtapas extends Controller
 {
     public function listarEtapas(Request $req) {
 
+        $etapas = DB::table('app_etapas')->select('id', 'nome')->get();
+
+        return response()->json(['data' => $etapas], 200);
+    }
+
+    public function getEtapas(Request $req) {
+
         $etapas = DB::table('app_etapas')->select('id', 'nome')->where('id_tcc', $req->id_tcc)->get();
 
         return response()->json(['data' => $etapas], 200);

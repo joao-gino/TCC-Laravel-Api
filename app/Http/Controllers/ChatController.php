@@ -14,4 +14,12 @@ class ChatController extends Controller
         return [];
 
     }
+
+    public function chats(Request $req) {
+
+    }
+
+    public function send(Request $req) {
+        
+    }
 }

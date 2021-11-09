@@ -28,14 +28,15 @@ Route::put('/att-tcc', 'App\Http\Controllers\ControladorTCC@updateTcc')->name('u
 Route::delete('/inactivate-tcc/{id_tcc}', 'App\Http\Controllers\ControladorTCC@inactivateTcc')->name('inactivateTcc');
 
 // * Etapas
-Route::get('/etapas/{id_tcc}', 'App\Http\Controllers\ControladorEtapas@listarEtapas')->name('listarEtapas'); // * OK
+Route::get('/etapas', 'App\Http\Controllers\ControladorEtapas@listarEtapas')->name('listarEtapas'); // * OK
+Route::get('/etapas/{id_tcc}', 'App\Http\Controllers\ControladorEtapas@getEtapas')->name('getEtapas'); // * OK
 Route::post('/etapas/new-etapa', 'App\Http\Controllers\ControladorEtapas@novaEtapa')->name('novaEtapa'); // * OK
 Route::put('/etapas/att-etapa', 'App\Http\Controllers\ControladorEtapas@updateEtapa')->name('updateEtapa'); // * OK
 Route::delete('/etapas/delete-etapa', 'App\Http\Controllers\ControladorEtapas@deleteEtapa')->name('deleteEtapa'); // * OK
 
 // * Tasks Status
 Route::get('/etapas/tasks/{id_etapa}', 'App\Http\Controllers\ControladorTasks@listarTasks')->name('listarTasks'); // * OK
-Route::get('/etapas/tasks/{id_etapa}/{id_task}', 'App\Http\Controllers\ControladorTasks@getTask')->name('getTask'); //
+Route::get('/etapas/tasks/{id_etapa}/{id_task}', 'App\Http\Controllers\ControladorTasks@getTask')->name('getTask'); // * OK
 Route::post('/etapas/tasks/new', 'App\Http\Controllers\ControladorTasks@novaTask')->name('newTask'); // * OK
 Route::put('/etapas/tasks/att', 'App\Http\Controllers\ControladorTasks@updateTask')->name('updateTask'); // * OK
 Route::delete('/etapas/tasks/delete', 'App\Http\Controllers\ControladorTasks@deleteTask')->name('deleteTask'); // * OK
@@ -54,3 +55,6 @@ Route::get('/advisors', 'App\Http\Controllers\ControladorOrientadores@listarAdvi
 
 // * Chat
 Route::post('/messages', 'App\Http\Controllers\ChatController@message'); // * OK
+Route::post('/session/create', 'App\Http\Controllers\SessionController@create'); // * Criar sessão (contact to contact)
+Route::post('/session/chats', 'App\Http\Controllers\ChatController@chats'); // * Recuperar chats
+Route::post('/send', 'App\Http\Controllers\ChatController@send'); // * Enviar mensagem da sessão

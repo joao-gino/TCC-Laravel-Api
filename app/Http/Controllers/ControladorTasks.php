@@ -45,7 +45,9 @@ class ControladorTasks extends Controller
             
             \DB::commit();
 
-            return response()->json(['message' => 'Task adicionada com sucesso!'], 201);
+            $id = \DB::table('app_tasks')->orderBy('id', 'DESC')->first();
+
+            return response()->json(['id' => $id->id, 'message' => 'Task adicionada com sucesso!'], 201);
         } catch (\Exception $e) {
             \DB::rollback();
             return $e;

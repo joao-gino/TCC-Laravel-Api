@@ -15,6 +15,20 @@ class ControladorTCC extends Controller
     }
 
     public function getTccByUser(Request $req) {
+
+        $rules = [
+            'id_user' => 'required'
+        ];
+
+        $msg = [ 
+            'id_user.required' => 'ID do usuário não enviado.'
+        ];
+
+        $validation = \Validator::make($req->input(), $rules, $msg);
+
+        if($validation->fails()){
+            return response()->json(['message' => $validation->errors()], 400);
+        }
         
         $tcc = DB::table('app_tcc')->where('id_user', $req->id_user)->get();
 
@@ -31,20 +45,30 @@ class ControladorTCC extends Controller
 
     public function novoTcc(Request $req) {
 
-        if (!isset($req->id_user)) {
-            return response()->json(['message' => 'ID do usuário não enviado.'], 400);
-        } else if (!isset($req->id_category)) {
-            return response()->json(['message' => 'ID da categoria não enviado.'], 400);
-        } else if (!isset($req->name)) {
-            return response()->json(['message' => 'Nome do TCC não enviado.'], 400);
-        } else if (!isset($req->area)) {
-            return response()->json(['message' => 'Área do TCC não enviado.'], 400);
-        } else if (!isset($req->description)) {
-            return response()->json(['message' => 'Descrição do TCC não enviado.'], 400);
-        } else if (!isset($req->logo)) {
-            return response()->json(['message' => 'Logo do TCC não enviado.'], 400);
-        } else if (!isset($req->id_advisor)) {
-            return response()->json(['message' => 'Orientador do TCC não enviado.'], 400);
+        $rules = [
+            'id_user' => 'required',
+            'id_category' => 'required',
+            'name' => 'required',
+            'area' => 'required',
+            'description' => 'required',
+            'logo' => 'required',
+            'id_advisor' => 'required'
+        ];
+
+        $msg = [ 
+            'id_user.required' => 'ID do usuário não enviado.',
+            'id_category.required' => 'ID da categoria não enviado.',
+            'name.required' => 'Nome do TCC não enviado.',
+            'area.required' => 'Área do TCC não enviado.',
+            'description.required' => 'Descrição do TCC não enviado.',
+            'logo.required' => 'Logo do TCC não enviado.',
+            'id_advisor.required' => 'Orientador do TCC não enviado.'
+        ];
+
+        $validation = \Validator::make($req->input(), $rules, $msg);
+
+        if($validation->fails()){
+            return response()->json(['message' => $validation->errors()], 400);
         }
 
         $user = ControladorTCC::getUserById($req->id_user);
@@ -75,22 +99,32 @@ class ControladorTCC extends Controller
 
     public function updateTcc(Request $req) {
 
-        if (!isset($req->id_user)) {
-            return response()->json(['message' => 'ID do usuário não enviado.'], 400);
-        } else if (!isset($req->id_category)) {
-            return response()->json(['message' => 'ID da categoria não enviado.'], 400);
-        } else if (!isset($req->name)) {
-            return response()->json(['message' => 'Nome do TCC não enviado.'], 400);
-        } else if (!isset($req->area)) {
-            return response()->json(['message' => 'Área do TCC não enviado.'], 400);
-        } else if (!isset($req->description)) {
-            return response()->json(['message' => 'Descrição do TCC não enviado.'], 400);
-        } else if (!isset($req->logo)) {
-            return response()->json(['message' => 'Logo do TCC não enviado.'], 400);
-        } else if (!isset($req->id_advisor)) {
-            return response()->json(['message' => 'Orientador do TCC não enviado.'], 400);
-        } else if (!isset($req->id)) {
-            return response()->json(['message' => 'ID do TCC não enviado.'], 400);
+        $rules = [
+            'id_user' => 'required',
+            'id_category' => 'required',
+            'name' => 'required',
+            'area' => 'required',
+            'description' => 'required',
+            'logo' => 'required',
+            'id_advisor' => 'required',
+            'id' => 'required'
+        ];
+
+        $msg = [ 
+            'id_user.required' => 'ID do usuário não enviado.',
+            'id_category.required' => 'ID da categoria não enviado.',
+            'name.required' => 'Nome do TCC não enviado.',
+            'area.required' => 'Área do TCC não enviado.',
+            'description.required' => 'Descrição do TCC não enviado.',
+            'logo.required' => 'Logo do TCC não enviado.',
+            'id_advisor.required' => 'Orientador do TCC não enviado.',
+            'id.required' => 'ID do TCC não enviado.'
+        ];
+
+        $validation = \Validator::make($req->input(), $rules, $msg);
+
+        if($validation->fails()){
+            return response()->json(['message' => $validation->errors()], 400);
         }
 
         $user = ControladorTCC::getUserById($req->id_user);
@@ -130,8 +164,18 @@ class ControladorTCC extends Controller
 
     public function inactivateTcc(Request $req) {
 
-        if (!isset($req->id_tcc)) {
-            return response()->json(['message' => 'ID do TCC não enviado.'], 400);
+        $rules = [
+            'id_tcc' => 'required'
+        ];
+
+        $msg = [ 
+            'id_tcc.required' => 'ID do TCC não enviado.'
+        ];
+
+        $validation = \Validator::make($req->input(), $rules, $msg);
+
+        if($validation->fails()){
+            return response()->json(['message' => $validation->errors()], 400);
         }
 
         $user = ControladorTCC::getUserById($req->id_user);

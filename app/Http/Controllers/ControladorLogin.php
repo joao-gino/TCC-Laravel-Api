@@ -8,6 +8,23 @@ class ControladorLogin extends Controller
 {
     public function login(Request $req)
     {
+
+        $rules = [
+            'username' => 'required',
+            'password' => 'required'
+        ];
+
+        $msg = [ 
+            'username.required' => 'Usuário não enviado',
+            'password.required' => 'Senha não enviada'
+        ];
+
+        $validation = \Validator::make($req->input(), $rules, $msg);
+
+        if($validation->fails()){
+            return response()->json(['message' => $validation->errors()], 400);
+        }
+
         $username = $req->username;
         $password = sha1($req->password);
 

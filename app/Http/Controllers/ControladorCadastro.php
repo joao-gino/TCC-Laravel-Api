@@ -9,6 +9,21 @@ class ControladorCadastro extends Controller
 {
     public function cadastro(Request $req)
     {
+
+        $rules = [
+            'email' => 'required'
+        ];
+
+        $msg = [ 
+            'email.required' => 'E-mail não enviado'
+        ];
+
+        $validation = \Validator::make($req->input(), $rules, $msg);
+
+        if($validation->fails()){
+            return response()->json(['message' => $validation->errors()], 400);
+        }
+
         try {
             \DB::beginTransaction();
 
@@ -59,6 +74,21 @@ class ControladorCadastro extends Controller
 
     public function recoveryPassword(Request $req)
     {
+
+        $rules = [
+            'email' => 'required'
+        ];
+
+        $msg = [ 
+            'email.required' => 'E-mail não enviado'
+        ];
+
+        $validation = \Validator::make($req->input(), $rules, $msg);
+
+        if($validation->fails()){
+            return response()->json(['message' => $validation->errors()], 400);
+        }
+
         try {
             \DB::beginTransaction();
 

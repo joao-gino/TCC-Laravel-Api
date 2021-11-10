@@ -15,6 +15,20 @@ class ControladorEtapas extends Controller
     }
 
     public function getEtapas(Request $req) {
+        
+        $rules = [
+            'id_tcc' => 'required'
+        ];
+
+        $msg = [ 
+            'id_tcc.required' => 'ID do TCC não enviado.'
+        ];
+
+        $validation = \Validator::make($req->input(), $rules, $msg);
+
+        if($validation->fails()){
+            return response()->json(['message' => $validation->errors()], 400);
+        }
 
         $etapas = DB::table('app_etapas')->select('id', 'nome')->where('id_tcc', $req->id_tcc)->get();
 
@@ -23,10 +37,20 @@ class ControladorEtapas extends Controller
 
     public function novaEtapa(Request $req) {
 
-        if (!isset($req->id_tcc)) {
-            return response()->json(['message' => 'ID do TCC não enviado.'], 400);
-        } else if (!isset($req->nome)) {
-            return response()->json(['message' => 'Nome da etapa não enviado.'], 400);
+        $rules = [
+            'id_tcc' => 'required',
+            'nome' => 'required'
+        ];
+
+        $msg = [ 
+            'id_tcc.required' => 'ID do TCC não enviado.',
+            'nome.required' => 'Nome da etapa não enviado.'
+        ];
+
+        $validation = \Validator::make($req->input(), $rules, $msg);
+
+        if($validation->fails()){
+            return response()->json(['message' => $validation->errors()], 400);
         }
 
         try {
@@ -49,10 +73,22 @@ class ControladorEtapas extends Controller
 
     public function updateEtapa(Request $req) {
 
-        if (!isset($req->id)) {
-            return response()->json(['message' => 'ID da Etapa não enviado.'], 400);
-        } else if (!isset($req->nome)) {
-            return response()->json(['message' => 'Nome da etapa não enviado.'], 400);
+        $rules = [
+            'id' => 'required',
+            'id_tcc' => 'required',
+            'nome' => 'required'
+        ];
+
+        $msg = [ 
+            'id.required' => 'ID da Etapa não enviado',
+            'id_tcc.required' => 'ID do TCC não enviado.',
+            'nome.required' => 'Nome da etapa não enviado.'
+        ];
+
+        $validation = \Validator::make($req->input(), $rules, $msg);
+
+        if($validation->fails()){
+            return response()->json(['message' => $validation->errors()], 400);
         }
 
         try {
@@ -74,8 +110,18 @@ class ControladorEtapas extends Controller
 
     public function deleteEtapa(Request $req) {
 
-        if (!isset($req->id)) {
-            return response()->json(['message' => 'ID da Etapa não enviado.'], 400);
+        $rules = [
+            'id' => 'required'
+        ];
+
+        $msg = [ 
+            'id.required' => 'ID da Etapa não enviado.'
+        ];
+
+        $validation = \Validator::make($req->input(), $rules, $msg);
+
+        if($validation->fails()){
+            return response()->json(['message' => $validation->errors()], 400);
         }
 
         try {

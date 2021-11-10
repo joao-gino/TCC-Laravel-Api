@@ -9,12 +9,42 @@ class ControladorTasks extends Controller
 {
     public function listarTasks(Request $req) {
 
+        $rules = [
+            'id_etapa' => 'required'
+        ];
+
+        $msg = [ 
+            'id_etapa.required' => 'ID da Etapa não enviado.'
+        ];
+
+        $validation = \Validator::make($req->input(), $rules, $msg);
+
+        if($validation->fails()){
+            return response()->json(['message' => $validation->errors()], 400);
+        }
+
         $tasks = DB::table('app_tasks')->where('id_etapa', $req->id_etapa)->get();
 
         return response()->json($tasks, 200);
     }
 
     public function getTask(Request $req) {
+
+        $rules = [
+            'id_etapa' => 'required',
+            'id_task' => 'required'
+        ];
+
+        $msg = [ 
+            'id_etapa.required' => 'ID da Etapa não enviado.',
+            'id_task.required' => 'ID do Status não enviado.'
+        ];
+
+        $validation = \Validator::make($req->input(), $rules, $msg);
+
+        if($validation->fails()){
+            return response()->json(['message' => $validation->errors()], 400);
+        }
 
         $task = DB::table('app_tasks')->where('id_etapa', $req->id_etapa)->where('id', $req->id_task)->get();
 
@@ -23,14 +53,24 @@ class ControladorTasks extends Controller
 
     public function novaTask(Request $req) {
 
-        if (!isset($req->id_etapa)) {
-            return response()->json(['message' => 'ID da Etapa não enviado.'], 400);
-        } else if (!isset($req->id_status)) {
-            return response()->json(['message' => 'ID do Status não enviado.'], 400);
-        } else if (!isset($req->nome)) {
-            return response()->json(['message' => 'Nome da Task não enviado.'], 400);
-        } else if (!isset($req->descricao)) {
-            return response()->json(['message' => 'Descrição da Task não enviado.'], 400);
+        $rules = [
+            'id_etapa' => 'required',
+            'id_status' => 'required',
+            'nome' => 'required',
+            'descricao' => 'required'
+        ];
+
+        $msg = [ 
+            'id_etapa.required' => 'ID da Etapa não enviado.',
+            'id_status.required' => 'ID do Status não enviado.',
+            'nome.required' => 'Nome da Task não enviado.',
+            'descricao.required' => 'Descrição da Task não enviado.',
+        ];
+
+        $validation = \Validator::make($req->input(), $rules, $msg);
+
+        if($validation->fails()){
+            return response()->json(['message' => $validation->errors()], 400);
         }
 
         try {
@@ -57,16 +97,26 @@ class ControladorTasks extends Controller
 
     public function updateTask(Request $req) {
 
-        if (!isset($req->id_etapa)) {
-            return response()->json(['message' => 'ID da Etapa não enviado.'], 400);
-        } else if (!isset($req->id_status)) {
-            return response()->json(['message' => 'ID do Status não enviado.'], 400);
-        } else if (!isset($req->nome)) {
-            return response()->json(['message' => 'Nome da Task não enviado.'], 400);
-        } else if (!isset($req->descricao)) {
-            return response()->json(['message' => 'Descrição da Task não enviado.'], 400);
-        } else if (!isset($req->id)) {
-            return response()->json(['message' => 'ID da Task não enviado.'], 400);
+        $rules = [
+            'id_etapa' => 'required',
+            'id_status' => 'required',
+            'nome' => 'required',
+            'descricao' => 'required',
+            'id' => 'required'
+        ];
+
+        $msg = [ 
+            'id_etapa.required' => 'ID da Etapa não enviado.',
+            'id_status.required' => 'ID do Status não enviado.',
+            'nome.required' => 'Nome da Task não enviado.',
+            'descricao.required' => 'Descrição da Task não enviado.',
+            'id.required' => 'Id da Task não enviado.',
+        ];
+
+        $validation = \Validator::make($req->input(), $rules, $msg);
+
+        if($validation->fails()){
+            return response()->json(['message' => $validation->errors()], 400);
         }
 
         try {
@@ -91,8 +141,18 @@ class ControladorTasks extends Controller
 
     public function deleteTask(Request $req) {
 
-        if (!isset($req->id)) {
-            return response()->json(['message' => 'ID da Task não enviado.'], 400);
+        $rules = [
+            'id' => 'required'
+        ];
+
+        $msg = [ 
+            'id.required' => 'ID da Task não enviado.'
+        ];
+
+        $validation = \Validator::make($req->input(), $rules, $msg);
+
+        if($validation->fails()){
+            return response()->json(['message' => $validation->errors()], 400);
         }
 
         try {

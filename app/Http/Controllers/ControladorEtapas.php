@@ -15,6 +15,8 @@ class ControladorEtapas extends Controller
     }
 
     public function getEtapas(Request $req) {
+
+        $req['id_tcc'] = $req->id_tcc;
         
         $rules = [
             'id_tcc' => 'required'

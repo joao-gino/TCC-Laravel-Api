@@ -16,6 +16,8 @@ class ControladorTCC extends Controller
 
     public function getTccByUser(Request $req) {
 
+        $req['id_user'] = $req->id_user;
+
         $rules = [
             'id_user' => 'required'
         ];

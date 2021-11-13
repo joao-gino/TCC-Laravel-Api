@@ -9,6 +9,8 @@ class ControladorTasks extends Controller
 {
     public function listarTasks(Request $req) {
 
+        $req['id_etapa'] = $req->id_etapa;
+
         $rules = [
             'id_etapa' => 'required'
         ];
@@ -29,6 +31,9 @@ class ControladorTasks extends Controller
     }
 
     public function getTask(Request $req) {
+
+        $req['id_etapa'] = $req->id_etapa;
+        $req['id_task'] = $req->id_task;
 
         $rules = [
             'id_etapa' => 'required',

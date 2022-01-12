@@ -32,7 +32,9 @@ class ControladorTCC extends Controller
             return response()->json(['message' => $validation->errors()], 400);
         }
         
-        $tcc = DB::table('app_tcc_users')->where('id_user', $req->id_user)->get();
+        $tcc = DB::table('app_tcc_users')
+                    ->leftjoin('app_tcc', 'app_tcc.id_tcc', '=', 'app_tcc_users.id_tcc')
+                    ->where('id_user', $req->id_user)->get();
 
         if (empty($tcc[0])) {
 

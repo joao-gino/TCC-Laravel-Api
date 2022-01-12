@@ -111,11 +111,20 @@ class ControladorInvites extends Controller
             DB::beginTransaction();
 
             if($req->approved == 1) {
+                DB::table('app_invites')
+                        ->where('id', $req->id_invite)
+                        ->update([
+                            'approved' => $req->approved
+                        ]);
+
                 $invite = DB::table('app_invites')
                                 ->where('id', $req->id_invite)
-                                ->update([
-                                    'approved' => $req->approved
-                                ]);
+                                ->get();
+
+                DB::table('app_tcc_users')->insert([
+                    'id_tcc' => $invite[0]->id_tcc,
+                    'id_user' => $invite[0]->id_user_invited
+                ]);
 
                 DB::commit();
 

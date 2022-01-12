@@ -34,7 +34,8 @@ class ControladorTCC extends Controller
         
         $tcc = DB::table('app_tcc_users')
                     ->leftjoin('app_tcc', 'app_tcc.id_tcc', '=', 'app_tcc_users.id_tcc')
-                    ->where('id_user', $req->id_user)->get();
+                    ->select('app_tcc.*')
+                    ->where('app_tcc_users.id_user', $req->id_user)->get();
 
         if (empty($tcc[0])) {
 

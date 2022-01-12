@@ -40,6 +40,7 @@ class ControladorLogin extends Controller
                                     'app_tcc.name as invite_tcc_name', 
                                     'app_tcc.area as invite_tcc_area', 
                                     'app_tcc.description as invite_tcc_description')
+                        ->where('app_invites.id_user_invited', 'app_users.id')
                         ->where('app_users.username', $username)
                         ->where('app_users.access_key', $password)
                         ->get();

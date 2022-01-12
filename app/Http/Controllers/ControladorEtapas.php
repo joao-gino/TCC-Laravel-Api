@@ -65,7 +65,9 @@ class ControladorEtapas extends Controller
             
             \DB::commit();
 
-            return response()->json(['message' => 'Etapa adicionada com sucesso!'], 201);
+            $id = \DB::table('app_etapas')->orderBy('id', 'DESC')->first();
+
+            return response()->json(['id' => $id->id, 'message' => 'Etapa adicionada com sucesso!'], 201);
         } catch (\Exception $e) {
             \DB::rollback();
             return $e;

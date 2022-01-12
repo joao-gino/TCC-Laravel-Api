@@ -37,7 +37,7 @@ class ControladorCadastro extends Controller
 
                 $strings = '0123456789abcdefghijklmnopqrstuvwxyz';
 
-                $password = substr(str_shuffle($strings), 0, 10);
+                $password_email = substr(str_shuffle($strings), 0, 10);
     
                 $username = strtolower(explode('@', $req->email)[0]);
     
@@ -45,7 +45,7 @@ class ControladorCadastro extends Controller
                 $firstname = ucwords($name[0]);
                 $lastname = ucwords($name[1]);
     
-                $password = sha1($password);
+                $password = sha1($password_email);
                 $token = rand(1111111, 9999999);
 
                 \DB::table('app_users')->insert([
@@ -61,7 +61,7 @@ class ControladorCadastro extends Controller
 
                 $email = new MailController();
     
-                $email->sendEmail($username, $password, $req->email, $firstname);
+                $email->sendEmail($username, $password_email, $req->email, $firstname);
     
                 return response()->json(["message" => "Usuário cadastrado com sucesso"], 201);
 

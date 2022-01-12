@@ -30,8 +30,8 @@ class ControladorLogin extends Controller
         $password = sha1($req->password);
 
         $user = \DB::table('app_users')
-                        ->join('app_invites', 'app_invites.id_user_invited', '=', 'app_users.id')
-                        ->join('app_tcc', 'app_tcc.id', '=', 'app_invites.id_tcc')
+                        ->leftjoin('app_invites', 'app_invites.id_user_invited', '=', 'app_users.id')
+                        ->leftjoin('app_tcc', 'app_tcc.id', '=', 'app_invites.id_tcc')
                         ->select('app_users.*', 
                                     'app_invites.id as id_invite', 
                                     'app_invites.id_user_inviter', 

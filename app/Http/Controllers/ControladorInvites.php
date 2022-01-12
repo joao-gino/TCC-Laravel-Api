@@ -17,7 +17,7 @@ class ControladorInvites extends Controller
 
     public function getInvites(Request $req, $id_user = 0) {
 
-        $req['id_user_invited'] = $req->id_tcc;
+        $req['id_user_invited'] = $req->id_user_invited;
         
         $rules = [
             'id_user_invited' => 'required'
@@ -93,17 +93,11 @@ class ControladorInvites extends Controller
         
         $rules = [
             'id_invite' => 'required',
-            'id_tcc' => 'required',
-            'id_user_invited' => 'required',
-            'id_user_inviter' => 'required',
             'approved' => 'required'
         ];
 
         $msg = [
             'id_invite.required' => 'ID do convite não enviado.',
-            'id_tcc.required' => 'ID do TCC não enviado.',
-            'id_user_invited.required' => 'ID do usuário não enviado.',
-            'id_user_inviter.required' => 'ID do usuário que convida não enviado.',
             'approved.required' => 'Aprovação não enviada.'
         ];
 
@@ -116,18 +110,25 @@ class ControladorInvites extends Controller
         try {
             DB::beginTransaction();
 
-            DB::table('app_invites')
-                ->where('id', $req->id_invite)
-                ->update([
-                    'id_tcc' => $req->id_tcc,
-                    'id_user_invited' => $req->id_user_invited,
-                    'id_user_inviter' => $req->id_user_inviter,
-                    'approved' => $req->approved == true ? 1 : 0
-                ]);
+            if($req->approved == 1) {
+                $invite = DB::table('app_invites')
+                                ->where('id', $req->id_invite)
+                                ->update([
+                                    'approved' => $req->approved
+                                ]);
 
-            DB::commit();
+                DB::commit();
 
-            return response()->json(['message' => 'Convite atualizado com sucesso.'], 200);
+                return response()->json(['message' => 'Convite aceito com sucesso.'], 200);                                
+            } else {
+                $invite = DB::table('app_invites')
+                                ->where('id', $req->id_invite)
+                                ->delete();
+
+                DB::commit();
+
+                return response()->json(['message' => 'Convite negado com sucesso.'], 200);
+            }
 
         } catch (\Exception $e) {
             DB::rollback();

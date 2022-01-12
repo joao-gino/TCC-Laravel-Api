@@ -58,3 +58,9 @@ Route::post('/messages', 'App\Http\Controllers\ChatController@message'); // * OK
 Route::post('/session/create', 'App\Http\Controllers\SessionController@create'); // * Criar sessão (contact to contact)
 Route::post('/session/chats', 'App\Http\Controllers\ChatController@chats'); // * Recuperar chats
 Route::post('/send', 'App\Http\Controllers\ChatController@send'); // * Enviar mensagem da sessão
+
+// * Invites
+Route::get('/invites', 'App\Http\Controllers\ControladorInvites@listarTcc')->name('listarInvites');
+Route::get('/invites/{id_user_invited}', 'App\Http\Controllers\ControladorInvites@getInvites')->name('getInvites');
+Route::post('/new-invite', 'App\Http\Controllers\ControladorInvites@novoInvite')->name('novoInvite');
+Route::put('/att-invite', 'App\Http\Controllers\ControladorInvites@updateInvite')->name('updateInvite');

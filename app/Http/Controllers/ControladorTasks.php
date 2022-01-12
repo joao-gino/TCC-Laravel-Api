@@ -25,15 +25,17 @@ class ControladorTasks extends Controller
             return response()->json(['message' => $validation->errors()], 400);
         }
 
-        $tasks = DB::table('app_tasks')
+        $users = DB::table('app_tasks')
                     ->leftjoin('app_etapas', 'app_tasks.id_etapa', '=', 'app_etapas.id')
                     ->leftjoin('app_tcc', 'app_etapas.id_tcc', '=', 'app_tcc.id')
                     ->leftjoin('app_tcc_users', 'app_tcc.id', '=', 'app_tcc_users.id_tcc')
                     ->leftjoin('app_users', 'app_tcc_users.id_user', '=', 'app_users.id')
-                    ->select('app_tasks.*', 'app_tcc_users.id_user', 'app_users.first_name', 'app_users.last_name')
+                    ->select('app_users.*')
                     ->where('id_etapa', $req->id_etapa)->get();
 
-        return response()->json($tasks, 200);
+        $tasks = DB::table('app_tasks')->where('id_etapa', $req->id_etapa)->get();
+
+        return response()->json(['tasks' => $tasks, 'users' => $users], 200);
     }
 
     public function getTask(Request $req) {

@@ -117,3 +117,17 @@ CREATE TABLE app_tasks (
     FOREIGN KEY FK_App_tasks_status (id_status) REFERENCES app_status_tasks (id) ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 END
+
+BEGIN
+CREATE TABLE app_invites (
+	id int auto_increment primary key,
+	id_tcc int not null,
+	id_user_invited int not null,
+	id_user_inviter int not null,
+	approved bool default false,
+	date_add datetime default current_timestamp,
+	FOREIGN KEY FK_App_invites_tcc (id_tcc) REFERENCES app_tcc (id) ON UPDATE NO ACTION ON DELETE NO ACTION,
+	FOREIGN KEY FK_App_invites_users (id_user_invited) REFERENCES app_users (id) ON UPDATE NO ACTION ON DELETE NO ACTION,
+	FOREIGN KEY FK_App_invites_users (id_user_inviter) REFERENCES app_users (id) ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+END

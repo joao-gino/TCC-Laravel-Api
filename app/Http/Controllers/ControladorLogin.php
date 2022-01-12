@@ -34,13 +34,14 @@ class ControladorLogin extends Controller
                         ->leftjoin('app_tcc', 'app_tcc.id', '=', 'app_invites.id_tcc')
                         ->select('app_users.*', 
                                     'app_invites.id as id_invite', 
-                                    'app_invites.id_user_inviter', 
+                                    'app_invites.id_user_inviter',
+                                    'app_invites.id_user_invited',
                                     'app_invites.id_tcc', 
                                     'app_invites.approved as invite_approved', 
                                     'app_tcc.name as invite_tcc_name', 
                                     'app_tcc.area as invite_tcc_area', 
                                     'app_tcc.description as invite_tcc_description')
-                        ->where('app_invites.id_user_invited', 'app_users.id')
+                        // ->where('app_invites.id_user_invited', 'app_users.id')
                         ->where('app_users.username', $username)
                         ->where('app_users.access_key', $password)
                         ->get();
